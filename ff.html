@@ -122,12 +122,13 @@
               <div class="float-left">
                 <span class="temperature" id="temperature"></span
                 ><a
-                  href="file:///Users/fatemeh/Documents/shecodes/plus/plus5.html"
+                  href="file:///Users/fatemeh/Documents/shecodes/plus/ff.html"
                   class="celsius"
                   >°C</a
                 >|<a
                   href="file:///Users/fatemeh/Documents/shecodes/plus/cc.html"
                   class="farenheit"
+                  id="farenheit"
                   >°F</a
                 >
               </div>
@@ -170,7 +171,16 @@
     }
 
     function displayWeatherCondition(response) {
+      let temperatureElement = document.querySelector("#temperature");
+      let cityElement = document.querySelector("#city");
+      let descriptionElement = document.querySelector("#description");
+      let humidityElement = document.querySelector("#humidity");
+      let windElement = document.querySelector("#wind");
+      let dateElement = document.querySelector("#date");
+      let iconElement = document.querySelector("#icon");
+      celsiusTemperature = response.data.main.temp;
       document.querySelector("#city").innerHTML = response.data.name;
+
       document.querySelector("#temperature").innerHTML = Math.round(
         response.data.main.temp
       );
@@ -208,16 +218,12 @@
       navigator.geolocation.getCurrentPosition(searchLocation);
     }
 
-    function convertToFahrenheit(event) {
+    function displayFarenheitTemperature(event) {
       event.preventDefault();
-      let temperatureElement = document.querySelector("#temperature");
-      temperatureElement.innerHTML = 66;
-    }
 
-    function convertToCelsius(event) {
-      event.preventDefault();
       let temperatureElement = document.querySelector("#temperature");
-      temperatureElement.innerHTML = 19;
+      let farenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+      temperatureElement.innerHTML = Math.round(farenheitTemperature);
     }
 
     let dateElement = document.querySelector("#date");
@@ -233,5 +239,7 @@
     currentLocationButton.addEventListener("click", getCurrentLocation);
 
     searchCity("New York");
+    let farenheitLink = document.querySelector("#farenheit");
+    farenheitLink.addEventListener("click", displayFarenheitTemperature);
   </script>
 </html>
