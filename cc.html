@@ -116,6 +116,7 @@
                 >|<a
                   href="file:///Users/fatemeh/Documents/shecodes/plus/cc.html"
                   class="farenheit"
+                  id="farenheit"
                   >°F</a
                 >
               </div>
@@ -195,17 +196,11 @@
       event.preventDefault();
       navigator.geolocation.getCurrentPosition(searchLocation);
     }
-
-    function convertToFahrenheit(event) {
+    function displayFarenheitTemperature(event) {
       event.preventDefault();
+      let farenheitTemperature = (14 * 9) / 5 + 32;
       let temperatureElement = document.querySelector("#temperature");
-      temperatureElement.innerHTML = 66;
-    }
-
-    function convertToCelsius(event) {
-      event.preventDefault();
-      let temperatureElement = document.querySelector("#temperature");
-      temperatureElement.innerHTML = 19;
+      temperatureElement.innerHTML = Math.round(farenheitTemperature);
     }
 
     let dateElement = document.querySelector("#date");
@@ -221,5 +216,7 @@
     currentLocationButton.addEventListener("click", getCurrentLocation);
 
     searchCity("New York");
+    let farenheitLink = document.querySelector("#farenheit");
+    farenheitLink.addEventListener("click", displayFarenheitTemperature);
   </script>
 </html>
